@@ -1,0 +1,49 @@
+header{
+    height:15vh;
+    background-color: #202124;
+    display: flex;
+        align-items: center;
+
+    .container-header{
+    display: flex;
+    // flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 10vh;
+    width: 100%;
+    
+    }
+    .logo-header{
+        width: 50%;
+        display: flex;
+        justify-content: center;
+        // border: solid blue 2px;
+    }
+    img{
+        width: 100px;
+    }
+    h4{
+        padding: 0;
+        margin: 0;
+        color: white;
+        border: none;
+        font-family: 'Marvel', sans-serif;
+        font-weight: bold;
+        font-size: 17px;
+    }
+    .link-nav
+    {text-decoration: none;
+        :hover{
+        border-bottom: solid 1px #ed1d24;
+    }}
+    nav{
+        width: 55%;
+        display: flex;
+        justify-content: space-around;
+        margin-top: 10px;
+        // border: solid red 2px;
+    }
+    .login{
+        display: flex;
+    }
+}

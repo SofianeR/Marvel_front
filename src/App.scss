@@ -1,0 +1,23 @@
+// import style components / pages
+@import "./components/Header/header.scss";
+@import "./pages/Characters/characters.scss";
+@import "./pages/Comics/comics.scss";
+@import "./pages/SingleCharacter/SingleCharacter.scss";
+@import "./components/Footer/footer.scss";
+@import "./pages/Favoris/favoris.scss";
+
+
+
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Marvel:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+.App{
+    background-color: #202124;
+    color: white;
+    font-family: 'Marvel', sans-serif;
+    box-sizing: border-box;
+}
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
