@@ -117,7 +117,9 @@ function App() {
                 setFavoris={setFavoris}
                 refreshFav={refreshFav}
                 setRefreshFav={setRefreshFav}
+                showModalLogi={showModalLogin}
                 setShowModalSignup={setShowModalSignup}
+                showModalSignup={showModalSignup}
                 setShowModalLogin={setShowModalLogin}
                 token={token}
                 setDisplayFooter={setDisplayFooter}

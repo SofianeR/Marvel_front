@@ -26,7 +26,7 @@ const SearchBarCharacters = ({
           setRecommandations(response.data.results);
         }
       } catch (error) {
-        console.log(error.message);
+        alert(error.message);
       }
     };
     fetchRecommandations();

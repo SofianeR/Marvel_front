@@ -29,6 +29,8 @@ const Characters = ({
   setShowModalLogin,
   token,
   setDisplayFooter,
+  showModalLogin,
+  showModalSignup,
   heart,
   setHeart,
 }) => {
@@ -141,10 +143,10 @@ const Characters = ({
           );
         }
       } catch (error) {
-        console.log(error.message);
+        alert(error.message);
       }
     } else {
-      console.log("unauthorized");
+      alert("unauthorized");
     }
   };
 
@@ -152,13 +154,14 @@ const Characters = ({
     try {
       fetchCharacter();
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   }, [skip, titleSubmit]);
 
   return (
     <div
       className="container"
+      syle={{ opacity: showModalLogin || showModalSignup ? "0.5" : "1" }}
       onClick={() => {
         setShowModalLogin(false);
         setShowModalSignup(false);

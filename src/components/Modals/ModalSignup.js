@@ -43,7 +43,7 @@ const ModalSignup = ({ showModalSignup, setShowModalSignup }) => {
         alert("un des champs du formulaire est vide");
       }
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
   return (

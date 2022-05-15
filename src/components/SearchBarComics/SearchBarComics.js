@@ -24,7 +24,7 @@ const SearchBarComics = ({
 
           setRecommandationComics(response.data.results);
         } catch (error) {
-          console.log(error.message);
+          alert(error.message);
         }
       }
     };

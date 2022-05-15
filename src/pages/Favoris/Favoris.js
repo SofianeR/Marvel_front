@@ -47,7 +47,7 @@ const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
 
       Cookies.set("favoris", response.data);
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 
@@ -87,7 +87,7 @@ const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
         setListFav(copyListFav);
         setLoading(false);
       } catch (error) {
-        console.log(error.message);
+        alert(error.message);
       }
     };
     displayFavoris();

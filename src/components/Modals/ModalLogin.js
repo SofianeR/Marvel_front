@@ -21,7 +21,7 @@ const ModalLogin = ({ showModalLogin, setUser, setShowModalLogin }) => {
         alert("erreur mail ou password");
       }
     } catch (error) {
-      console.log(error.message);
+      alert(error.message);
     }
   };
 
