@@ -33,6 +33,8 @@ const ModalLogin = ({ showModalLogin, setUser, setShowModalLogin }) => {
             e.preventDefault();
             login();
           }}>
+          <h2>Connectez-vous</h2>
+
           <input
             type="text"
             placeholder="Email"
@@ -47,7 +49,11 @@ const ModalLogin = ({ showModalLogin, setUser, setShowModalLogin }) => {
               setLoginPassword(e.target.value);
             }}
           />
-          <input type="submit" value={"Se connecter"} />
+          <input
+            type="submit"
+            value={"Se connecter"}
+            className="button-submit"
+          />
         </form>
       </div>
     )

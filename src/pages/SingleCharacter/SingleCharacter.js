@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 const SingleCharacter = ({
   isLoading,
@@ -47,35 +47,49 @@ const SingleCharacter = ({
       <div className="singleCharacterSheet">
         <div>
           {listComics.length !== 0 && (
-            <img
-              src={`${listComics.thumbnail.path}.${listComics.thumbnail.extension}`}
-              alt=""
-            />
+            <div className="container">
+              <div className="comic-container">
+                <div className="comic-img">
+                  <img
+                    src={`${listComics.thumbnail.path}.${listComics.thumbnail.extension}`}
+                    alt=""
+                  />
+                </div>
+                <div className="information-single-comic">
+                  <div className="comic">
+                    <p>{listComics.name}</p>
+                  </div>
+                  <div className="comic">
+                    <p>{listComics.description}</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           )}
         </div>
-        <div>
-          <p>{listComics.name}</p>
-        </div>
       </div>
-      <div className="listComics">
+      <div className="character-container">
         {listComics.length !== 0 &&
           listComics.comics.map((comic, index) => {
             const pictureListComics = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
             return (
               <div
+                className="card"
+                id="hover"
                 onClick={() => {
                   navigate(`/comic/${comic._id}`, {
                     state: { comic: comic },
                   });
                 }}>
-                <div className="thumbnail-list-comics">
-                  <img src={pictureListComics} alt="" />
+                <div className="character-card-img">
+                  <img src={pictureListComics} alt="picture characters" />
                 </div>
-                <div className="title">
-                  <p>{comic.title}</p>
-                </div>
-                <div className="description">
-                  <p>{comic.description}</p>
+                <div className="character-card">
+                  <div className="information-card">
+                    <div className="character-card-name">
+                      <p>{comic.title}</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             );

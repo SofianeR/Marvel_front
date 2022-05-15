@@ -8,6 +8,7 @@ const SearchBarComics = ({
   setTitleSubmit,
   display,
   setDisplay,
+  setSkip,
 }) => {
   const [recommandationComics, setRecommandationComics] = useState([]);
   useEffect(() => {
@@ -18,7 +19,6 @@ const SearchBarComics = ({
           setDisplay(true);
 
           const server_url = `https://marvel-sr.herokuapp.com/comics${str}`;
-          console.log(server_url);
 
           const response = await axios.get(server_url);
 
@@ -29,7 +29,7 @@ const SearchBarComics = ({
       }
     };
     fetchRecommandationComics();
-  }, [title]);
+  }, [title, titleSubmit]);
   return (
     <div className="search-character-container">
       <form
@@ -37,26 +37,42 @@ const SearchBarComics = ({
           e.preventDefault();
           setTitleSubmit(!titleSubmit);
         }}>
+        <select
+          name=""
+          id="skip"
+          onChange={(e) => {
+            setSkip(e.target.value);
+          }}>
+          <option value="">Skip</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="500">500</option>
+        </select>
         <input
+          className="search"
           type="text"
+          placeholder="Search for comics"
+          value={title}
           onChange={(e) => {
             setTitle(e.target.value);
           }}
         />
-        <input type="submit" value={"Envoyer"} />
+        <input type="submit" value={"Envoyer"} className={"submit"} />
       </form>
       {display && (
-        <div className="recommandation-container">
-          <button
-            onClick={() => {
-              setDisplay(false);
-            }}>
-            Click
-          </button>
+        <div className="recommandations">
           {recommandationComics &&
             recommandationComics.map((recommandation, index) => {
               return (
-                <div className="recommandation">
+                <div
+                  className="container-recommandation"
+                  onClick={() => {
+                    setTitle(recommandation.title);
+                    setTitleSubmit(!titleSubmit);
+                    setDisplay(false);
+                  }}>
                   <p>{recommandation.title}</p>
                 </div>
               );

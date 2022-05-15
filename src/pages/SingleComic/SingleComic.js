@@ -41,40 +41,46 @@ const SingleComic = ({
 
   return (
     <div>
-      <h1>SingleComic</h1>
+      <div className="title">
+        <h1>{comic.title}</h1>
+      </div>
       {isLoading === true ? (
         <div>
           <p style={{ color: "white" }}>En cours de chargement</p>
         </div>
       ) : (
-        <div className="comic-container">
-          <div>
+        <div className="container">
+          <div className="comic-container">
             <div className="comic-img">
               <img src={pictureComic} alt="" />
             </div>
-            <div className="comic">
-              <p>{comic.title}</p>
-            </div>
-            <div className="comic">
-              <p>{comic.description}</p>
+            <div className="information-single-comic">
+              <div className="comic">
+                <p>{comic.title}</p>
+              </div>
+              <div className="comic">
+                <p>{comic.description}</p>
+              </div>
             </div>
           </div>
           <div className="character-container">
             {characterByComic &&
               characterByComic.map((character, index) => {
                 const pictureCharacters = `${character.thumbnail.path}.${character.thumbnail.extension}`;
-                console.log(character._id);
                 return (
-                  <Link to={`/character/${character._id}`}>
-                    <div onClick={() => {}}>
-                      <div className="comic-img">
-                        <img src={pictureCharacters} alt="" />
+                  <Link
+                    to={`/character/${character._id}`}
+                    className={"linkTo-single"}>
+                    <div className="card">
+                      <div className="character-card-img">
+                        <img src={pictureCharacters} alt="picture characters" />
                       </div>
-                      <div className="character-container" key={index}>
-                        <p>{character.name}</p>
-                      </div>
-                      <div className="comic">
-                        <p>{character.description}</p>
+                      <div className="character-card">
+                        <div className="information-card">
+                          <div className="character-card-name">
+                            <p>{character.name}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </Link>

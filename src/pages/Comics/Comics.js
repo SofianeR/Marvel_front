@@ -25,11 +25,11 @@ const Comics = ({
   const navigate = useNavigate();
 
   useEffect(() => {
-    try {
-      setDisplayFooter(true);
-      setIsLoading(true);
+    setDisplayFooter(true);
+    const fetchComics = async () => {
+      try {
+        setIsLoading(true);
 
-      const fetchComics = async () => {
         let filter_url = "";
 
         let filtersObject = {};
@@ -55,22 +55,21 @@ const Comics = ({
         });
 
         const server_url = `https://marvel-sr.herokuapp.com/comics${filter_url}`;
-        console.log(server_url);
 
         const response = await axios.get(server_url);
 
         setPageCount(Math.ceil(response.data.count / limit));
 
         setComics(response.data.results);
-      };
 
-      fetchComics();
+        setDisplay(false);
 
-      setIsLoading(false);
-      setDisplay(false);
-    } catch (error) {
-      console.log(error.message);
-    }
+        setIsLoading(false);
+      } catch (error) {
+        console.log(error.message);
+      }
+    };
+    fetchComics();
   }, [skip, titleSubmit]);
 
   return (
@@ -80,7 +79,9 @@ const Comics = ({
         setShowModalLogin(false);
         setShowModalSignup(false);
       }}>
-      <h1>Comics</h1>
+      <div className="title">
+        <h1>Tous les comics</h1>
+      </div>
       <SearchBarComics
         titleSubmit={titleSubmit}
         setTitleSubmit={setTitleSubmit}
@@ -112,12 +113,14 @@ const Comics = ({
                   <img src={pictureComic} alt="picture comics" />
                 </div>
 
-                <div className="comic-card-name">
-                  <p>{comic.title}</p>
-                </div>
+                <div className="information">
+                  <div className="comic-card-name">
+                    <p>{comic.title}</p>
+                  </div>
 
-                <div className="comic-card-description">
-                  <p>{comic.description}</p>
+                  <div className="comic-card-description">
+                    <p>{comic.description}</p>
+                  </div>
                 </div>
               </div>
               // </Link>

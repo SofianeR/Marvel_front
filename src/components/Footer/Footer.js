@@ -41,6 +41,35 @@ const Footer = ({
     };
     pagination();
   }, [page, pageCount]);
-  return <footer>{hidePage}</footer>;
+  return (
+    <div className="pagination">
+      <div className="element-pagination">
+        <select
+          className="select"
+          onChange={(e) => {
+            setPage(e.target.value);
+          }}>
+          <option value={page - 1}>{page - 1}</option>
+          <option value={page - 2}>{page - 2}</option>
+          <option value={page - 3}>{page - 3}</option>
+          <option value={page - 4}>{page - 4}</option>
+          <option value={page - 5}>{page - 5}</option>
+        </select>
+        <div className="count-page">{hidePage}</div>
+
+        <select
+          className="select"
+          onChange={(e) => {
+            setPage(e.target.value);
+          }}>
+          <option value={page + 1}>{page + 1}</option>
+          <option value={page + 2}>{page + 2}</option>
+          <option value={page + 3}>{page + 3}</option>
+          <option value={page + 4}>{page + 4}</option>
+          <option value={page + 5}>{page + 5}</option>
+        </select>
+      </div>
+    </div>
+  );
 };
 export default Footer;

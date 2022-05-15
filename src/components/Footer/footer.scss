@@ -1,4 +1,33 @@
-footer{
+.pagination{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
+    .element-pagination{
+        width: 50%;
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        .count-page{
+            width: 100%;
+            display: flex;
+            justify-content: space-around;
+        }
+        .count-page p{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: white;
+            color: black;
+            border-radius: 50%;
+            width: 20px;
+        }
+        .select{
+            padding:5px 10px;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            background-color: #ED1D24;
+            margin: 0 50px;
+        }
+    }
+
 }

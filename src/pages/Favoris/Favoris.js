@@ -1,6 +1,8 @@
 import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
   const [listFav, setListFav] = useState([]);
@@ -27,6 +29,7 @@ const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
     const stringifiedDb = JSON.stringify(arrayOfIdForMongo);
 
     formData.append(`favoris`, stringifiedDb);
+
     formData.append(`delete`, true);
 
     try {
@@ -43,8 +46,6 @@ const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
       setListFav(favorisUpdate);
 
       Cookies.set("favoris", response.data);
-
-      console.log(stateFavoris, listFav);
     } catch (error) {
       console.log(error.message);
     }
@@ -90,7 +91,6 @@ const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
       }
     };
     displayFavoris();
-    console.log(listFav);
   }, []);
 
   return (
@@ -102,31 +102,38 @@ const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
           const picture = `${character.thumbnail.path}.${character.thumbnail.extension}`;
 
           return (
-            <div className={"character-card"} key={index}>
-              <div className="character-card-img">
-                {picture && <img src={picture} alt="picture characters" />}
-              </div>
+            <div className="position">
+              <div className={"character-card"} key={index}>
+                <div className="character-card-img">
+                  {picture && <img src={picture} alt="picture characters" />}
+                </div>
+                <Link
+                  className="linkTo-single"
+                  to={`/character/${character._id}`}>
+                  <div className="character-card-name">
+                    <p>{character.name}</p>
+                  </div>
 
-              <div className="character-card-name">
-                <p>{character.name}</p>
+                  <div className="character-card-description">
+                    <p>{character.description}</p>
+                  </div>
+                </Link>
               </div>
-
-              <div className="character-card-description">
-                <p>{character.description}</p>
-              </div>
-              <button
+              <FontAwesomeIcon
+                icon={"trash"}
+                className={"trash"}
                 onClick={() => {
                   // setClickToRemove(!clickToRemove);
                   supprFavoris(character._id);
-                }}>
-                Supprimer
-              </button>
+                }}
+              />
             </div>
           );
         })
       ) : (
         <div>
           <h1>favoris</h1>
+          <p>Ajouter des personnages pour les afficher ici</p>
         </div>
       )}
     </div>

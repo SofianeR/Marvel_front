@@ -19,6 +19,10 @@ import Favoris from "./pages/Favoris/Favoris";
 import ModalSignup from "./components/Modals/ModalSignup";
 import ModalLogin from "./components/Modals/ModalLogin";
 
+import { library } from "@fortawesome/fontawesome-svg-core";
+import { faHeart, faTrash } from "@fortawesome/free-solid-svg-icons";
+library.add(faHeart, faTrash);
+
 function App() {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -41,6 +45,7 @@ function App() {
   // favoris
   const [favoris, setFavoris] = useState(Cookies.get("favoris") || []);
   const [refreshFav, setRefreshFav] = useState(false);
+  const [heart, setHeart] = useState([]);
 
   //state display
   const [showModalLogin, setShowModalLogin] = useState(false);
@@ -116,6 +121,8 @@ function App() {
                 setShowModalLogin={setShowModalLogin}
                 token={token}
                 setDisplayFooter={setDisplayFooter}
+                heart={heart}
+                setHeart={setHeart}
               />
             }
           />

@@ -7,21 +7,21 @@ const SearchBarCharacters = ({
   setName,
   titleSubmit,
   setTitleSubmit,
+  setSkip,
+  display,
+  setDisplay,
 }) => {
-  const [display, setDisplay] = useState(false);
   const [recommandations, setRecommandations] = useState([]);
   useEffect(() => {
     const fetchRecommandations = async () => {
       const cleanState = [];
       setRecommandations(cleanState);
-      console.log(recommandations);
       setDisplay(true);
       try {
         let str = `?name=${name}`;
 
         if (name.length > 0) {
           const server_url = `https://marvel-sr.herokuapp.com/characters${str}`;
-          // console.log(server_url);
           const response = await axios.get(server_url);
           setRecommandations(response.data.results);
         }
@@ -30,7 +30,7 @@ const SearchBarCharacters = ({
       }
     };
     fetchRecommandations();
-  }, [name]);
+  }, [name, titleSubmit]);
   return (
     <div className="search-character-container">
       <form
@@ -38,26 +38,42 @@ const SearchBarCharacters = ({
           e.preventDefault();
           setTitleSubmit(!titleSubmit);
         }}>
+        <select
+          name=""
+          id="skip"
+          onChange={(e) => {
+            setSkip(e.target.value);
+          }}>
+          <option value="">Skip</option>
+          <option value="25">25</option>
+          <option value="50">50</option>
+          <option value="100">100</option>
+          <option value="200">200</option>
+          <option value="500">500</option>
+        </select>
         <input
           type="text"
+          className="search"
+          placeholder="Search for character"
+          value={name}
           onChange={(e) => {
             setName(e.target.value);
           }}
         />
-        <input type="submit" value={"Envoyer"} />
+        <input type="submit" value={"Envoyer"} className={"submit"} />
       </form>
       {display && (
         <div className="recommandations">
-          <button
-            onClick={() => {
-              setDisplay(false);
-            }}>
-            click
-          </button>
           {recommandations.length > 0 &&
             recommandations.map((recommandation, index) => {
               return (
-                <div className="container-recommandation">
+                <div
+                  className="container-recommandation"
+                  onClick={() => {
+                    setName(recommandation.name);
+                    setTitleSubmit(!titleSubmit);
+                    setDisplay(false);
+                  }}>
                   <p>{recommandation.name}</p>
                 </div>
               );

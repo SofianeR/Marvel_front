@@ -1,49 +1,57 @@
 header{
-    height:15vh;
     background-color: #202124;
-    display: flex;
-        align-items: center;
-
-    .container-header{
-    display: flex;
-    // flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 10vh;
-    width: 100%;
-    
-    }
-    .logo-header{
-        width: 50%;
+    color: white;
+    border-bottom: #ED1D24 solid 1px;
+    .header-container{
         display: flex;
+        flex-direction: column;
         justify-content: center;
+        align-items: center;
         // border: solid blue 2px;
+        padding: 10px;
+        h4{
+            // margin-top: 5px;
+            font-size: 25px;
+            color: white;
+        }
+        .column-header{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            // border: solid purple 2px;
+            height: 12vh;
+        }
+        nav{
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            // border: solid red 3px;
+            width: 50%;
+        }
+        .link-nav{
+            text-decoration: none;
+            color: black;
+            :hover{
+                border-bottom: #ED1D24 solid 1px;
+            }
+        }
+        
+        img{
+            height: 15vh;
+        }
     }
-    img{
-        width: 100px;
-    }
-    h4{
-        padding: 0;
-        margin: 0;
-        color: white;
-        border: none;
-        font-family: 'Marvel', sans-serif;
-        font-weight: bold;
-        font-size: 17px;
-    }
-    .link-nav
-    {text-decoration: none;
-        :hover{
-        border-bottom: solid 1px #ed1d24;
-    }}
-    nav{
-        width: 55%;
-        display: flex;
-        justify-content: space-around;
-        margin-top: 10px;
-        // border: solid red 2px;
-    }
-    .login{
-        display: flex;
-    }
+     .login,.deconnexion {
+        //  border: solid blue 2px;
+         width: 100%;
+         display: flex;
+         justify-content:flex-end;
+        button{
+            padding: 10px;
+            border: none;
+            background-color: #ED1D24;
+            color: white;
+            border-radius: 10px;
+            margin: 10px;
+        }
+     }
 }

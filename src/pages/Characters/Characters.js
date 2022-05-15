@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import axios from "axios";
 import Cookies from "js-cookie";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchBarCharacters from "../../components/SearchBarCharacters/SearchBarCharacters";
 import Favoris from "../Favoris/Favoris";
@@ -28,7 +29,11 @@ const Characters = ({
   setShowModalLogin,
   token,
   setDisplayFooter,
+  heart,
+  setHeart,
 }) => {
+  const [displayRecommandation, setDisplayRecommandation] = useState(false);
+
   const fetchCharacter = async () => {
     setDisplayFooter(true);
     setIsLoading(true);
@@ -58,17 +63,29 @@ const Characters = ({
     });
 
     const server_url = `https://marvel-sr.herokuapp.com/characters${filter_url}`;
-    console.log(server_url);
 
     const response = await axios.get(server_url);
 
     setPageCount(Math.ceil(response.data.count / limit));
 
-    setCharacters(response.data.results);
+    const arrayData = response.data.results;
+
+    arrayData.map((character, index) => {
+      character.heart = false;
+    });
+
+    setCharacters(arrayData);
+
+    setDisplayRecommandation(false);
+
     setIsLoading(false);
   };
 
-  const setCookieFavoris = async (characterId, characterName) => {
+  const setCookieFavoris = async (
+    characterId,
+    characterName,
+    characterHeart
+  ) => {
     if (token) {
       try {
         const newObj = {};
@@ -84,9 +101,8 @@ const Characters = ({
           arrayState = [...favoris];
         }
 
-        console.log(arrayState);
-
         newObj.characterId = characterId;
+        newObj.heart = characterHeart;
 
         if (
           !arrayState.find(
@@ -106,8 +122,6 @@ const Characters = ({
           Cookies.set("favoris", stringifiedState);
         }
 
-        // console.log(arrayState);
-
         setFavoris(arrayState);
 
         const formData = new FormData();
@@ -125,7 +139,6 @@ const Characters = ({
               },
             }
           );
-          // console.log(response.data);
         }
       } catch (error) {
         console.log(error.message);
@@ -138,7 +151,6 @@ const Characters = ({
   useEffect(() => {
     try {
       fetchCharacter();
-      console.log(token);
     } catch (error) {
       console.log(error.message);
     }
@@ -150,64 +162,75 @@ const Characters = ({
       onClick={() => {
         setShowModalLogin(false);
         setShowModalSignup(false);
+        setDisplayRecommandation(false);
       }}>
-      <h1>Tous les Personnages</h1>
-      <select
-        name=""
-        id=""
-        onChange={(e) => {
-          setSkip(e.target.value);
-        }}>
-        <option value="">Skip</option>
+      <div className="title">
+        <h1>Tous les Personnages</h1>
+      </div>
 
-        <option value="25">25</option>
-        <option value="50">50</option>
-      </select>
       <SearchBarCharacters
         name={name}
         setName={setName}
         fetchCharacter={fetchCharacter}
         titleSubmit={titleSubmit}
         setTitleSubmit={setTitleSubmit}
+        setSkip={setSkip}
+        display={displayRecommandation}
+        setDisplay={setDisplayRecommandation}
       />
 
       {isLoading === true ? (
         <div>
-          <h1 style={{ color: "blue" }}>En cours de chargement</h1>
+          <h1 style={{ color: "white" }}>En cours de chargement</h1>
         </div>
       ) : (
         <div className="container-character-card">
           {characters.length !== 0 &&
             characters.map((character, index) => {
               const picture = `${character.thumbnail.path}.${character.thumbnail.extension}`;
+
               return (
-                <div key={index}>
+                <div key={index} className="position">
                   <Link
                     className="linkTo-single"
                     to={`/character/${character._id}`}>
-                    <div className="character-card">
+                    <div className="card">
                       <div className="character-card-img">
                         <img src={picture} alt="picture characters" />
                       </div>
+                      <div className="character-card">
+                        <div className="information-card">
+                          <div className="character-card-name">
+                            <p>{character.name}</p>
+                          </div>
 
-                      <div className="character-card-name">
-                        <p>{character.name}</p>
-                      </div>
-
-                      <div className="character-card-description">
-                        <p>{character.description}</p>
+                          <div className="character-card-description">
+                            <p>{character.description}</p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </Link>
 
                   {token && (
-                    <button
+                    <FontAwesomeIcon
+                      icon={"heart"}
+                      className="like-button"
+                      style={{
+                        backgroundColor: character.heart ? "red" : "black",
+                      }}
                       onClick={() => {
                         setRefreshFav(!refreshFav);
-                        setCookieFavoris(character._id, character.name);
-                      }}>
-                      Like
-                    </button>
+                        if (character.heart === false) {
+                          setCookieFavoris(
+                            character._id,
+                            character.name,
+                            character.heart
+                          );
+                        }
+                        character.heart = !character.heart;
+                      }}
+                    />
                   )}
                 </div>
               );

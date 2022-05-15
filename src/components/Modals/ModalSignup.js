@@ -48,45 +48,45 @@ const ModalSignup = ({ showModalSignup, setShowModalSignup }) => {
   };
   return (
     showModalSignup && (
-      <div className="signup-container">
-        <h2>S'inscrire</h2>
-        <div className="form-signup">
-          <form
-            onSubmit={(e) => {
-              e.preventDefault();
-              signup();
-            }}>
-            <input
-              type="text"
-              placeholder="username"
-              onChange={(e) => {
-                setUserNameSignup(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              placeholder="email"
-              onChange={(e) => {
-                setEmailSignup(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              placeholder="password"
-              onChange={(e) => {
-                setPasswordSignup(e.target.value);
-              }}
-            />
-            <input
-              type="text"
-              placeholder="password confirm"
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-              }}
-            />
-            <input type="submit" />
-          </form>
-        </div>
+      <div className="modal-container">
+        <form
+          id="signup-modal"
+          onSubmit={(e) => {
+            e.preventDefault();
+            signup();
+          }}>
+          <h2>S'inscrire</h2>
+
+          <input
+            type="text"
+            placeholder="username"
+            onChange={(e) => {
+              setUserNameSignup(e.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="email"
+            onChange={(e) => {
+              setEmailSignup(e.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="password"
+            onChange={(e) => {
+              setPasswordSignup(e.target.value);
+            }}
+          />
+          <input
+            type="text"
+            placeholder="password confirm"
+            onChange={(e) => {
+              setConfirmPassword(e.target.value);
+            }}
+          />
+          <input type="submit" className="button-submit" />
+        </form>
       </div>
     )
   );
