@@ -9,6 +9,8 @@ const SearchBarComics = ({
   display,
   setDisplay,
   setSkip,
+  showModalLogin,
+  showModalSignup,
 }) => {
   const [recommandationComics, setRecommandationComics] = useState([]);
   useEffect(() => {

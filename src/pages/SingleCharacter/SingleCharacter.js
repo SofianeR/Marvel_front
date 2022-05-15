@@ -8,6 +8,8 @@ const SingleCharacter = ({
   setShowModalSignup,
   setShowModalLogin,
   setDisplayFooter,
+  showModalLogin,
+  showModalSignup,
 }) => {
   const [listComics, setListComics] = useState([]);
 
@@ -44,7 +46,13 @@ const SingleCharacter = ({
         setShowModalLogin(false);
         setShowModalSignup(false);
       }}>
-      <div className="singleCharacterSheet">
+      <div
+        className="singleCharacterSheet"
+        style={
+          showModalLogin || showModalSignup
+            ? { opacity: "0.2" }
+            : { opacity: "1" }
+        }>
         <div>
           {listComics.length !== 0 && (
             <div className="container">

@@ -9,6 +9,8 @@ const Footer = ({
   isLoading,
   page,
   setPage,
+  showModalLogin,
+  showModalSignup,
 }) => {
   const [hidePage, setHidePage] = useState([]);
 
@@ -42,7 +44,13 @@ const Footer = ({
     pagination();
   }, [page, pageCount]);
   return (
-    <div className="pagination">
+    <div
+      className="pagination"
+      style={
+        showModalLogin || showModalSignup
+          ? { opacity: "0.2" }
+          : { opacity: "1" }
+      }>
       <div className="element-pagination">
         <select
           className="select"

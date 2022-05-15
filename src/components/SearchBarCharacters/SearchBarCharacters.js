@@ -10,6 +10,8 @@ const SearchBarCharacters = ({
   setSkip,
   display,
   setDisplay,
+  showModalLogin,
+  showModalSignup,
 }) => {
   const [recommandations, setRecommandations] = useState([]);
   useEffect(() => {

@@ -14,7 +14,12 @@ const Header = ({
 }) => {
   const navigate = useNavigate();
   return (
-    <header>
+    <header
+      style={
+        showModalLogin || showModalSignup
+          ? { opacity: "0.2" }
+          : { opacity: "1" }
+      }>
       <div className="container">
         <div className="header-container">
           {token ? (

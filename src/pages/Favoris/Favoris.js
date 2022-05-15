@@ -4,7 +4,14 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
+const Favoris = ({
+  stateFavoris,
+  setFavoris,
+  token,
+  setDisplayFooter,
+  showModalLogin,
+  showModalSignup,
+}) => {
   const [listFav, setListFav] = useState([]);
   const [loading, setLoading] = useState(false);
   // const [clickToRemove, setClickToRemove] = useState(false);
@@ -102,7 +109,13 @@ const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
           const picture = `${character.thumbnail.path}.${character.thumbnail.extension}`;
 
           return (
-            <div className="position">
+            <div
+              className="position"
+              style={
+                showModalLogin || showModalSignup
+                  ? { opacity: "0.2" }
+                  : { opacity: "1" }
+              }>
               <div className={"character-card"} key={index}>
                 <div className="character-card-img">
                   {picture && <img src={picture} alt="picture characters" />}

@@ -29,12 +29,14 @@ const Characters = ({
   setShowModalLogin,
   token,
   setDisplayFooter,
-  showModalLogin,
-  showModalSignup,
+
   heart,
   setHeart,
+  showModalLogin,
+  showModalSignup,
 }) => {
   const [displayRecommandation, setDisplayRecommandation] = useState(false);
+  console.log(showModalLogin);
 
   const fetchCharacter = async () => {
     setDisplayFooter(true);
@@ -161,7 +163,11 @@ const Characters = ({
   return (
     <div
       className="container"
-      syle={{ opacity: showModalLogin || showModalSignup ? "0.5" : "1" }}
+      style={
+        showModalLogin || showModalSignup
+          ? { opacity: "0.2" }
+          : { opacity: "1" }
+      }
       onClick={() => {
         setShowModalLogin(false);
         setShowModalSignup(false);

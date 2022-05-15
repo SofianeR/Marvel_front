@@ -117,8 +117,8 @@ function App() {
                 setFavoris={setFavoris}
                 refreshFav={refreshFav}
                 setRefreshFav={setRefreshFav}
-                showModalLogi={showModalLogin}
                 setShowModalSignup={setShowModalSignup}
+                showModalLogin={showModalLogin}
                 showModalSignup={showModalSignup}
                 setShowModalLogin={setShowModalLogin}
                 token={token}
@@ -146,6 +146,8 @@ function App() {
                 setShowModalSignup={setShowModalSignup}
                 setShowModalLogin={setShowModalLogin}
                 setDisplayFooter={setDisplayFooter}
+                showModalLogin={showModalLogin}
+                showModalSignup={showModalSignup}
               />
             }
           />
@@ -159,6 +161,8 @@ function App() {
                 setShowModalSignup={setShowModalSignup}
                 setShowModalLogin={setShowModalLogin}
                 setDisplayFooter={setDisplayFooter}
+                showModalLogin={showModalLogin}
+                showModalSignup={showModalSignup}
               />
             }
           />
@@ -172,6 +176,8 @@ function App() {
                 // refreshFav={refreshFav}
                 token={token}
                 setDisplayFooter={setDisplayFooter}
+                showModalLogin={showModalLogin}
+                showModalSignup={showModalSignup}
               />
             }
           />
@@ -184,6 +190,8 @@ function App() {
                 comics={comics}
                 setComics={setComics}
                 setDisplayFooter={setDisplayFooter}
+                showModalLogin={showModalLogin}
+                showModalSignup={showModalSignup}
               />
             }
           />
@@ -199,6 +207,8 @@ function App() {
             isLoading={isLoading}
             setPage={setPage}
             page={page}
+            showModalLogin={showModalLogin}
+            showModalSignup={showModalSignup}
           />
         )}
       </div>

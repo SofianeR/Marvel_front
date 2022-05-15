@@ -18,6 +18,8 @@ const Comics = ({
   setShowModalSignup,
   setShowModalLogin,
   setDisplayFooter,
+  showModalLogin,
+  showModalSignup,
 }) => {
   const [title, setTitle] = useState("");
   const [display, setDisplay] = useState(false);
@@ -74,6 +76,11 @@ const Comics = ({
 
   return (
     <div
+      style={
+        showModalLogin || showModalSignup
+          ? { opacity: "0.2" }
+          : { opacity: "1" }
+      }
       className="container"
       onClick={() => {
         setShowModalLogin(false);

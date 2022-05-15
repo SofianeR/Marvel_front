@@ -8,6 +8,8 @@ const SingleComic = ({
   isLoading,
   setIsLoading,
   setDisplayFooter,
+  showModalLogin,
+  showModalSignup,
 }) => {
   const [click, setClick] = useState(false);
   const [characterByComic, setCharacterByComic] = useState();
@@ -40,7 +42,12 @@ const SingleComic = ({
   }, [click]);
 
   return (
-    <div>
+    <div
+      style={
+        showModalLogin || showModalSignup
+          ? { opacity: "0.2" }
+          : { opacity: "1" }
+      }>
       <div className="title">
         <h1>{comic.title}</h1>
       </div>
