@@ -19,14 +19,11 @@ const ModalSignup = ({ showModalSignup, setShowModalSignup }) => {
           passwordSignup.length > 5
         ) {
           if (passwordSignup === confirmPassword) {
-            const response = await axios.post(
-              "https://marvel-sr.herokuapp.com/user/signup",
-              {
-                email: emailSignup,
-                password: passwordSignup,
-                username: userNameSignup,
-              }
-            );
+            await axios.post("https://marvel-sr.herokuapp.com/user/signup", {
+              email: emailSignup,
+              password: passwordSignup,
+              username: userNameSignup,
+            });
             if (checkPassword) {
               setCheckPassword(false);
             }

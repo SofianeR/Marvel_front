@@ -6,7 +6,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Favoris = ({
   stateFavoris,
-  setFavoris,
   token,
   setDisplayFooter,
   showModalLogin,
@@ -118,7 +117,7 @@ const Favoris = ({
               }>
               <div className={"character-card"} key={index}>
                 <div className="character-card-img">
-                  {picture && <img src={picture} alt="picture characters" />}
+                  {picture && <img src={picture} alt="character" />}
                 </div>
                 <Link
                   className="linkTo-single"

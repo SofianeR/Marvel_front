@@ -11,7 +11,6 @@ const SingleComic = ({
   showModalLogin,
   showModalSignup,
 }) => {
-  const [click, setClick] = useState(false);
   const [characterByComic, setCharacterByComic] = useState();
   const location = useLocation();
 
@@ -39,7 +38,7 @@ const SingleComic = ({
       }
     };
     singleComic();
-  }, [click]);
+  }, []);
 
   return (
     <div
@@ -80,7 +79,7 @@ const SingleComic = ({
                     className={"linkTo-single"}>
                     <div className="card">
                       <div className="character-card-img">
-                        <img src={pictureCharacters} alt="picture characters" />
+                        <img src={pictureCharacters} alt="characters" />
                       </div>
                       <div className="character-card">
                         <div className="information-card">
@@ -96,13 +95,6 @@ const SingleComic = ({
           </div>
         </div>
       )}
-
-      <button
-        onClick={() => {
-          setClick(!click);
-        }}>
-        CLICK
-      </button>
     </div>
   );
 };

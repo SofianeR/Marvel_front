@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import SearchBarComics from "../../components/SearchBarComics/SearchBarComics";
 
@@ -117,7 +117,7 @@ const Comics = ({
                   });
                 }}>
                 <div className="comic-card-img">
-                  <img src={pictureComic} alt="picture comics" />
+                  <img src={pictureComic} alt="comics" />
                 </div>
 
                 <div className="information">

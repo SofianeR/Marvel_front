@@ -1,8 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 
 import Marvel_Logo from "../../assets/img/Marvel_Logo.svg";
-import ModalLogin from "../Modals/ModalLogin";
-import ModalSignup from "../Modals/ModalSignup";
 
 const Header = ({
   showModalLogin,

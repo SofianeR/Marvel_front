@@ -1,11 +1,6 @@
 import "./App.scss";
 import { useState } from "react";
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  useNavigate,
-} from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import Cookies from "js-cookie";
 
@@ -54,12 +49,12 @@ function App() {
 
   // login
   const [token, setToken] = useState(Cookies.get("tokenLogin") || null);
-  const [userLogged, setUserLogged] = useState();
+  // const [userLogged, setUserLogged] = useState();
 
   // function check if log
   const setUser = (token, user) => {
     if (token !== null) {
-      setUserLogged(user);
+      // setUserLogged(user);
       Cookies.set("tokenLogin", token);
 
       setFavoris(JSON.stringify(user.favoris));
@@ -69,7 +64,7 @@ function App() {
       Cookies.remove("favoris");
       // setFavoris([]);
       setToken(null);
-      setUserLogged();
+      // setUserLogged();
     }
     setToken(token);
   };

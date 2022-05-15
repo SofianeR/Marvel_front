@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams, useNavigate, Link } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const SingleCharacter = ({
   isLoading,
@@ -90,7 +90,7 @@ const SingleCharacter = ({
                   });
                 }}>
                 <div className="character-card-img">
-                  <img src={pictureListComics} alt="picture characters" />
+                  <img src={pictureListComics} alt="comic book" />
                 </div>
                 <div className="character-card">
                   <div className="information-card">

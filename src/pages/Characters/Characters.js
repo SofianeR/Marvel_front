@@ -6,7 +6,6 @@ import Cookies from "js-cookie";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import SearchBarCharacters from "../../components/SearchBarCharacters/SearchBarCharacters";
-import Favoris from "../Favoris/Favoris";
 
 const Characters = ({
   isLoading,
@@ -29,9 +28,6 @@ const Characters = ({
   setShowModalLogin,
   token,
   setDisplayFooter,
-
-  heart,
-  setHeart,
   showModalLogin,
   showModalSignup,
 }) => {
@@ -134,7 +130,7 @@ const Characters = ({
 
         if (stringifiedDb.length !== 0) {
           formData.append(`favoris`, stringifiedDb);
-          const response = await axios.post(
+          await axios.post(
             "https://marvel-sr.herokuapp.com/user/favoris",
             formData,
             {
@@ -205,7 +201,7 @@ const Characters = ({
                     to={`/character/${character._id}`}>
                     <div className="card">
                       <div className="character-card-img">
-                        <img src={picture} alt="picture characters" />
+                        <img src={picture} alt="characters" />
                       </div>
                       <div className="character-card">
                         <div className="information-card">
