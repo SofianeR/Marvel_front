@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 import SearchBarComics from "../../components/SearchBarComics/SearchBarComics";
 
@@ -7,6 +8,8 @@ import axios from "axios";
 const Comics = ({
   isLoading,
   setIsLoading,
+  comics,
+  setComics,
   skip,
   limit,
   setPageCount,
@@ -14,13 +17,16 @@ const Comics = ({
   setTitleSubmit,
   setShowModalSignup,
   setShowModalLogin,
+  setDisplayFooter,
 }) => {
-  const [comics, setComics] = useState([]);
   const [title, setTitle] = useState("");
   const [display, setDisplay] = useState(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     try {
+      setDisplayFooter(true);
       setIsLoading(true);
 
       const fetchComics = async () => {
@@ -91,7 +97,17 @@ const Comics = ({
           {comics.map((comic, index) => {
             const pictureComic = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
             return (
-              <div className="comic-card" key={index}>
+              // <Link
+              //   to={`/comic/${comic._id}`}
+              //   state={{ comic: "comic" }}
+              //   key={index}>
+              <div
+                className="comic-card"
+                onClick={() => {
+                  navigate(`/comic/${comic._id}`, {
+                    state: { comic: comic },
+                  });
+                }}>
                 <div className="comic-card-img">
                   <img src={pictureComic} alt="picture comics" />
                 </div>
@@ -104,6 +120,7 @@ const Comics = ({
                   <p>{comic.description}</p>
                 </div>
               </div>
+              // </Link>
             );
           })}
         </div>

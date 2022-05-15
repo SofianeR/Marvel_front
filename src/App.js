@@ -10,10 +10,10 @@ import {
 import Cookies from "js-cookie";
 
 import Header from "./components/Header/Header";
-// import Home from "./pages/Home";
 import Characters from "./pages/Characters/Characters";
 import Comics from "./pages/Comics/Comics";
 import SingleCharacter from "./pages/SingleCharacter/SingleCharacter";
+import SingleComic from "./pages/SingleComic/SingleComic";
 import Footer from "./components/Footer/Footer";
 import Favoris from "./pages/Favoris/Favoris";
 import ModalSignup from "./components/Modals/ModalSignup";
@@ -21,6 +21,10 @@ import ModalLogin from "./components/Modals/ModalLogin";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
+
+  // data
+  const [characters, setCharacters] = useState([]);
+  const [comics, setComics] = useState([]);
 
   // filter fetchData
   const [limit, setLimit] = useState(100);
@@ -38,9 +42,10 @@ function App() {
   const [favoris, setFavoris] = useState(Cookies.get("favoris") || []);
   const [refreshFav, setRefreshFav] = useState(false);
 
-  //state Modal
+  //state display
   const [showModalLogin, setShowModalLogin] = useState(false);
   const [showModalSignup, setShowModalSignup] = useState(false);
+  const [displayFooter, setDisplayFooter] = useState(false);
 
   // login
   const [token, setToken] = useState(Cookies.get("tokenLogin") || null);
@@ -92,6 +97,8 @@ function App() {
               <Characters
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
+                characters={characters}
+                setCharacters={setCharacters}
                 name={name}
                 setName={setName}
                 skip={skip}
@@ -108,6 +115,7 @@ function App() {
                 setShowModalSignup={setShowModalSignup}
                 setShowModalLogin={setShowModalLogin}
                 token={token}
+                setDisplayFooter={setDisplayFooter}
               />
             }
           />
@@ -118,6 +126,8 @@ function App() {
               <Comics
                 isLoading={isLoading}
                 setIsLoading={setIsLoading}
+                comics={comics}
+                setComics={setComics}
                 skip={skip}
                 limit={limit}
                 setPageCount={setPageCount}
@@ -126,6 +136,7 @@ function App() {
                 setTitleSubmit={setTitleSubmit}
                 setShowModalSignup={setShowModalSignup}
                 setShowModalLogin={setShowModalLogin}
+                setDisplayFooter={setDisplayFooter}
               />
             }
           />
@@ -138,6 +149,7 @@ function App() {
                 isLoading={isLoading}
                 setShowModalSignup={setShowModalSignup}
                 setShowModalLogin={setShowModalLogin}
+                setDisplayFooter={setDisplayFooter}
               />
             }
           />
@@ -150,21 +162,36 @@ function App() {
                 setFavoris={setFavoris}
                 // refreshFav={refreshFav}
                 token={token}
+                setDisplayFooter={setDisplayFooter}
+              />
+            }
+          />
+          <Route
+            path="/comic/:id"
+            element={
+              <SingleComic
+                isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                comics={comics}
+                setComics={setComics}
+                setDisplayFooter={setDisplayFooter}
               />
             }
           />
         </Routes>
 
-        <Footer
-          skip={skip}
-          setSkip={setSkip}
-          limit={limit}
-          setLimit={setLimit}
-          pageCount={pageCount}
-          isLoading={isLoading}
-          setPage={setPage}
-          page={page}
-        />
+        {displayFooter && (
+          <Footer
+            skip={skip}
+            setSkip={setSkip}
+            limit={limit}
+            setLimit={setLimit}
+            pageCount={pageCount}
+            isLoading={isLoading}
+            setPage={setPage}
+            page={page}
+          />
+        )}
       </div>
     </Router>
   );

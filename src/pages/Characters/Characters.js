@@ -10,6 +10,8 @@ import Favoris from "../Favoris/Favoris";
 const Characters = ({
   isLoading,
   setIsLoading,
+  characters,
+  setCharacters,
   name,
   setName,
   skip,
@@ -25,10 +27,10 @@ const Characters = ({
   setShowModalSignup,
   setShowModalLogin,
   token,
+  setDisplayFooter,
 }) => {
-  const [characters, setCharacters] = useState([]);
-
   const fetchCharacter = async () => {
+    setDisplayFooter(true);
     setIsLoading(true);
 
     const filtersObject = {};

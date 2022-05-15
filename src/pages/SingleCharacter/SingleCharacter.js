@@ -1,20 +1,24 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
 const SingleCharacter = ({
   isLoading,
   setIsLoading,
   setShowModalSignup,
   setShowModalLogin,
+  setDisplayFooter,
 }) => {
   const [listComics, setListComics] = useState([]);
+
+  const navigate = useNavigate();
 
   const { id } = useParams();
 
   useEffect(() => {
     try {
       const fetchSingleCharacter = async () => {
+        setDisplayFooter(false);
         setIsLoading(true);
 
         const response = await axios.get(
@@ -58,7 +62,12 @@ const SingleCharacter = ({
           listComics.comics.map((comic, index) => {
             const pictureListComics = `${comic.thumbnail.path}.${comic.thumbnail.extension}`;
             return (
-              <div>
+              <div
+                onClick={() => {
+                  navigate(`/comic/${comic._id}`, {
+                    state: { comic: comic },
+                  });
+                }}>
                 <div className="thumbnail-list-comics">
                   <img src={pictureListComics} alt="" />
                 </div>

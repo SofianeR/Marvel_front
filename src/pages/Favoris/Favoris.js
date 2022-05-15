@@ -2,7 +2,7 @@ import axios from "axios";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
-const Favoris = ({ stateFavoris, setFavoris, token }) => {
+const Favoris = ({ stateFavoris, setFavoris, token, setDisplayFooter }) => {
   const [listFav, setListFav] = useState([]);
   const [loading, setLoading] = useState(false);
   // const [clickToRemove, setClickToRemove] = useState(false);
@@ -53,6 +53,8 @@ const Favoris = ({ stateFavoris, setFavoris, token }) => {
   useEffect(() => {
     const displayFavoris = async () => {
       try {
+        setDisplayFooter(false);
+
         setLoading(true);
         const copyListFav = [];
 
@@ -88,13 +90,14 @@ const Favoris = ({ stateFavoris, setFavoris, token }) => {
       }
     };
     displayFavoris();
+    console.log(listFav);
   }, []);
 
   return (
     <div className="fav-container">
       {loading === true ? (
         <p style={{ color: "blue" }}>en cours de chargement</p>
-      ) : (
+      ) : listFav.length > 0 ? (
         listFav.map((character, index) => {
           const picture = `${character.thumbnail.path}.${character.thumbnail.extension}`;
 
@@ -121,6 +124,10 @@ const Favoris = ({ stateFavoris, setFavoris, token }) => {
             </div>
           );
         })
+      ) : (
+        <div>
+          <h1>favoris</h1>
+        </div>
       )}
     </div>
   );
