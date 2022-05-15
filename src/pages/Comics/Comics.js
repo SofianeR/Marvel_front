@@ -17,6 +17,7 @@ const Comics = ({
 }) => {
   const [comics, setComics] = useState([]);
   const [title, setTitle] = useState("");
+  const [display, setDisplay] = useState(false);
 
   useEffect(() => {
     try {
@@ -47,7 +48,8 @@ const Comics = ({
           }
         });
 
-        let server_url = `https://marvel-sr.herokuapp.com/comics/${filter_url}`;
+        const server_url = `https://marvel-sr.herokuapp.com/comics${filter_url}`;
+        console.log(server_url);
 
         const response = await axios.get(server_url);
 
@@ -59,6 +61,7 @@ const Comics = ({
       fetchComics();
 
       setIsLoading(false);
+      setDisplay(false);
     } catch (error) {
       console.log(error.message);
     }
@@ -77,6 +80,8 @@ const Comics = ({
         setTitleSubmit={setTitleSubmit}
         title={title}
         setTitle={setTitle}
+        display={display}
+        setDisplay={setDisplay}
       />
 
       {isLoading === true ? (

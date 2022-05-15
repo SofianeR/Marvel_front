@@ -5,10 +5,13 @@ import axios from "axios";
 import Cookies from "js-cookie";
 
 import SearchBarCharacters from "../../components/SearchBarCharacters/SearchBarCharacters";
+import Favoris from "../Favoris/Favoris";
 
 const Characters = ({
   isLoading,
   setIsLoading,
+  name,
+  setName,
   skip,
   setSkip,
   limit,
@@ -24,7 +27,6 @@ const Characters = ({
   token,
 }) => {
   const [characters, setCharacters] = useState([]);
-  const [name, setName] = useState("");
 
   const fetchCharacter = async () => {
     setIsLoading(true);
@@ -54,6 +56,7 @@ const Characters = ({
     });
 
     const server_url = `https://marvel-sr.herokuapp.com/characters${filter_url}`;
+    console.log(server_url);
 
     const response = await axios.get(server_url);
 
@@ -67,21 +70,41 @@ const Characters = ({
     if (token) {
       try {
         const newObj = {};
-        const arrayState = [...favoris];
+
         const arrayDb = [];
+
+        let arrayState = [];
+
+        if (typeof favoris === "string") {
+          const parse = await JSON.parse(favoris);
+          arrayState = [...parse];
+        } else {
+          arrayState = [...favoris];
+        }
+
+        console.log(arrayState);
 
         newObj.characterId = characterId;
 
-        console.log(favoris);
-        console.log(arrayState);
+        if (
+          !arrayState.find(
+            (element) => element.characterId === newObj.characterId
+          ) &&
+          !arrayDb.find((element) => element.characterId === newObj.characterId)
+        ) {
+          arrayState.push(newObj);
 
-        arrayState.push(newObj);
-        arrayDb.push(newObj);
+          arrayDb.push(newObj);
+        }
 
         const stringifiedState = JSON.stringify(arrayState);
         const stringifiedDb = JSON.stringify(arrayDb);
 
-        Cookies.set("favoris", stringifiedState);
+        if (stringifiedState.length !== 0) {
+          Cookies.set("favoris", stringifiedState);
+        }
+
+        // console.log(arrayState);
 
         setFavoris(arrayState);
 
@@ -89,18 +112,19 @@ const Characters = ({
 
         const bearerToken = `Bearer ${token}`;
 
-        formData.append(`favoris`, stringifiedDb);
-
-        const response = await axios.post(
-          "https://marvel-sr.herokuapp.com/user/favoris",
-          formData,
-          {
-            headers: {
-              authorization: bearerToken,
-            },
-          }
-        );
-        console.log(response.data);
+        if (stringifiedDb.length !== 0) {
+          formData.append(`favoris`, stringifiedDb);
+          const response = await axios.post(
+            "https://marvel-sr.herokuapp.com/user/favoris",
+            formData,
+            {
+              headers: {
+                authorization: bearerToken,
+              },
+            }
+          );
+          // console.log(response.data);
+        }
       } catch (error) {
         console.log(error.message);
       }
@@ -112,6 +136,7 @@ const Characters = ({
   useEffect(() => {
     try {
       fetchCharacter();
+      console.log(token);
     } catch (error) {
       console.log(error.message);
     }
@@ -173,13 +198,15 @@ const Characters = ({
                     </div>
                   </Link>
 
-                  <button
-                    onClick={() => {
-                      setRefreshFav(!refreshFav);
-                      setCookieFavoris(character._id, character.name);
-                    }}>
-                    Like
-                  </button>
+                  {token && (
+                    <button
+                      onClick={() => {
+                        setRefreshFav(!refreshFav);
+                        setCookieFavoris(character._id, character.name);
+                      }}>
+                      Like
+                    </button>
+                  )}
                 </div>
               );
             })}

@@ -27,7 +27,6 @@ const ModalSignup = ({ showModalSignup, setShowModalSignup }) => {
                 username: userNameSignup,
               }
             );
-            console.log(response.data);
             if (checkPassword) {
               setCheckPassword(false);
             }

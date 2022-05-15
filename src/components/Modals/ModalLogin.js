@@ -16,7 +16,6 @@ const ModalLogin = ({ showModalLogin, setUser, setShowModalLogin }) => {
           }
         );
         setUser(response.data.token, response.data);
-        console.log(response.data);
         setShowModalLogin(false);
       } else {
         alert("erreur mail ou password");

@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import Marvel_Logo from "../../assets/img/Marvel_Logo.svg";
 import ModalLogin from "../Modals/ModalLogin";
@@ -12,6 +12,7 @@ const Header = ({
   setUser,
   token,
 }) => {
+  const navigate = useNavigate();
   return (
     <header>
       <div className="container-header">
@@ -36,18 +37,21 @@ const Header = ({
             to={"/comics"}>
             <h4>Comics</h4>
           </Link>
-          <Link
-            className="link-nav"
-            // style={{ textDecoration: "none" }}
-            to={"/favoris"}>
-            <h4>Favoris</h4>
-          </Link>
+          {token ? (
+            <Link
+              className="link-nav"
+              // style={{ textDecoration: "none" }}
+              to={"/favoris"}>
+              <h4>Favoris</h4>
+            </Link>
+          ) : null}
         </nav>
         {token ? (
           <div className="deconnexion">
             <button
               onClick={() => {
                 setUser(null);
+                navigate("/");
               }}>
               Deconnexion
             </button>

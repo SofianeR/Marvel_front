@@ -1,6 +1,11 @@
 import "./App.scss";
 import { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  useNavigate,
+} from "react-router-dom";
 
 import Cookies from "js-cookie";
 
@@ -20,6 +25,7 @@ function App() {
   // filter fetchData
   const [limit, setLimit] = useState(100);
   const [skip, setSkip] = useState();
+  const [name, setName] = useState("");
 
   // refresh searchbar
   const [titleSubmit, setTitleSubmit] = useState(false);
@@ -51,7 +57,7 @@ function App() {
     } else {
       Cookies.remove("tokenLogin");
       Cookies.remove("favoris");
-      setFavoris([]);
+      // setFavoris([]);
       setToken(null);
       setUserLogged();
     }
@@ -84,8 +90,10 @@ function App() {
             path="/"
             element={
               <Characters
-                setIsLoading={setIsLoading}
                 isLoading={isLoading}
+                setIsLoading={setIsLoading}
+                name={name}
+                setName={setName}
                 skip={skip}
                 setSkip={setSkip}
                 limit={limit}
@@ -141,10 +149,12 @@ function App() {
                 stateFavoris={favoris}
                 setFavoris={setFavoris}
                 // refreshFav={refreshFav}
+                token={token}
               />
             }
           />
         </Routes>
+
         <Footer
           skip={skip}
           setSkip={setSkip}
